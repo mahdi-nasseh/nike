@@ -24,6 +24,8 @@ class MyApp extends StatelessWidget {
           surface: ThemeLightColor.secondaryColor,
         ),
         textTheme: TextTheme(
+          labelLarge: defualFont.copyWith(fontWeight: FontWeight.bold),
+          bodyMedium: const TextStyle(color: ThemeLightColor.primaryTextColor),
           bodySmall:
               defualFont.copyWith(color: ThemeLightColor.secondaryTextColor),
           titleLarge: defualFont.copyWith(fontWeight: FontWeight.bold),

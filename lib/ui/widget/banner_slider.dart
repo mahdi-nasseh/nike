@@ -1,5 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:nike/common/utils.dart';
 import 'package:nike/ui/home/bloc/home_bloc.dart';
 import 'package:nike/ui/widget/image.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -17,7 +18,7 @@ class BannerSlider extends StatelessWidget {
         AspectRatio(
           aspectRatio: 2,
           child: PageView.builder(
-            physics: const BouncingScrollPhysics(),
+            physics: defualtScrollPhysics,
             controller: controller,
             itemCount: state.banners.length,
             itemBuilder: (context, index) {
@@ -31,26 +32,41 @@ class BannerSlider extends StatelessWidget {
             },
           ),
         ),
-        Positioned(
-          left: 0,
-          right: 0,
-          bottom: 8,
-          child: Center(
-            child: SmoothPageIndicator(
-              controller: controller, 
-              count: state.banners.length,
-              textDirection: TextDirection.rtl,
-              effect:  WormEffect(
-                activeDotColor: Theme.of(context).colorScheme.secondary,
-                dotColor: Colors.grey.shade400,
-                dotHeight: 3,
-                dotWidth: 20,
-                spacing: 4,
-              ),
-            ),
+        _SliderIndicator(controller: controller, state: state),
+      ],
+    );
+  }
+}
+
+class _SliderIndicator extends StatelessWidget {
+  const _SliderIndicator({
+    required this.controller,
+    required this.state,
+  });
+
+  final PageController controller;
+  final HomeSuccess state;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      left: 0,
+      right: 0,
+      bottom: 8,
+      child: Center(
+        child: SmoothPageIndicator(
+          controller: controller,
+          count: state.banners.length,
+          textDirection: TextDirection.rtl,
+          effect: WormEffect(
+            activeDotColor: Theme.of(context).colorScheme.secondary,
+            dotColor: Colors.grey.shade400,
+            dotHeight: 3,
+            dotWidth: 20,
+            spacing: 4,
           ),
         ),
-      ],
+      ),
     );
   }
 }
