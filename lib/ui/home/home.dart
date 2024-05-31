@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike/common/utils.dart';
@@ -6,8 +5,8 @@ import 'package:nike/data/product.dart';
 import 'package:nike/data/repository/banner_repository.dart';
 import 'package:nike/data/repository/product_repository.dart';
 import 'package:nike/ui/home/bloc/home_bloc.dart';
+import 'package:nike/ui/product/product.dart';
 import 'package:nike/ui/widget/banner_slider.dart';
-import 'package:nike/ui/widget/image.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -29,6 +28,7 @@ class HomeScreen extends StatelessWidget {
             builder: (context, state) {
               if (state is HomeSuccess) {
                 return ListView.builder(
+                    physics: defualtScrollPhysics,
                     itemCount: 5,
                     itemBuilder: (context, index) {
                       switch (index) {
@@ -134,66 +134,10 @@ class HorizantalList extends StatelessWidget {
               final product = products[index];
               return Padding(
                   padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
-                  child: SizedBox(
-                    width: 176,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Stack(
-                          children: [
-                            SizedBox(
-                              width: 176,
-                              height: 189,
-                              child: CachImage(
-                                imageUrl: product.imageUrl,
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                            ),
-                            Positioned(
-                              right: 8,
-                              top: 4,
-                              child: Container(
-                                width: 30,
-                                height: 30,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15)),
-                                child: const Icon(
-                                  CupertinoIcons.heart,
-                                  size: 18,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              right: 8, left: 8, bottom: 4),
-                          child: Text(
-                            product.title,
-                            maxLines: 1,
-                            style: themeData.textTheme.bodyMedium!
-                                .copyWith(overflow: TextOverflow.ellipsis),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8, left: 8),
-                          child: Text(
-                            product.previousPrice.withPriceLable,
-                            style: themeData.textTheme.bodySmall!.copyWith(
-                                decoration: TextDecoration.lineThrough),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8, left: 8),
-                          child: Text(
-                            product.price.withPriceLable,
-                            style: themeData.textTheme.bodyMedium,
-                          ),
-                        ),
-                      ],
-                    ),
+                  child: ProductSlid(
+                    product: product,
+                    themeData: themeData,
+                    borderRadius: BorderRadius.circular(12),
                   ));
             },
           ),
