@@ -25,10 +25,11 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: TextTheme(
           labelLarge: defualFont.copyWith(fontWeight: FontWeight.bold),
-          bodyMedium: const TextStyle(color: ThemeLightColor.primaryTextColor),
+          bodyMedium: defualFont,
           bodySmall:
               defualFont.copyWith(color: ThemeLightColor.secondaryTextColor),
-          titleLarge: defualFont.copyWith(fontWeight: FontWeight.bold),
+          titleLarge:
+              defualFont.copyWith(fontWeight: FontWeight.bold, fontSize: 18),
         ),
         useMaterial3: true,
       ),
