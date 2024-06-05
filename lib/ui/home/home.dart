@@ -7,6 +7,7 @@ import 'package:nike/data/repository/product_repository.dart';
 import 'package:nike/ui/home/bloc/home_bloc.dart';
 import 'package:nike/ui/product/product.dart';
 import 'package:nike/ui/widget/banner_slider.dart';
+import 'package:nike/ui/widget/error.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -67,20 +68,11 @@ class HomeScreen extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               } else if (state is HomeError) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(state.exception.message),
-                      ElevatedButton(
-                        onPressed: () {
-                          BlocProvider.of<HomeBloc>(context).add(HomeRefresh());
-                        },
-                        child: const Text('تلاش دوباره'),
-                      ),
-                    ],
-                  ),
-                );
+                return AppErrorException(
+                    exception: state.exception,
+                    onPressed: () => BlocProvider.of<HomeBloc>(context).add(
+                          HomeRefresh(),
+                        ));
               } else {
                 throw Exception('state is not supported');
               }
@@ -91,6 +83,8 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+
 
 class HorizantalList extends StatelessWidget {
   final String title;

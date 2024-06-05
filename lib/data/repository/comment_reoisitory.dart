@@ -3,7 +3,7 @@ import 'package:nike/data/comment.dart';
 import 'package:nike/data/source/commernt_data_source.dart';
 
 
-final commentRepository = CommentRepository(dataSource: CommentDataSource(httpclient: httpClient));
+final commentRepository = CommentRepository(dataSource: CommentRemoteDataSource(httpclient: httpClient));
 
 abstract class ICommentRepository {
   Future<List<CommentEntity>> getAll({required int productId});

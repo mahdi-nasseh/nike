@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nike/common/utils.dart';
 import 'package:nike/data/product.dart';
+import 'package:nike/ui/product/comment/comment_list.dart';
 import 'package:nike/ui/widget/image.dart';
 
 class ProductDetail extends StatelessWidget {
@@ -19,7 +20,8 @@ class ProductDetail extends StatelessWidget {
           onPressed: () {},
           label: const Text("افزوذن به سبد خرید"),
           backgroundColor: themeData.colorScheme.secondary,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(36)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(36)),
         ),
       ),
       body: SafeArea(
@@ -95,10 +97,12 @@ class ProductDetail extends StatelessWidget {
                               onPressed: () {}, child: const Text('ثبت نظر'))
                         ],
                       ),
-                      Container(color: Colors.blue,height: 800,)
                     ],
                   ),
                 ),
+              ),
+              CommentList(
+                productId: product.id,
               ),
             ],
           ),

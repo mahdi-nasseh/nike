@@ -6,12 +6,12 @@ abstract class ICommentDataSource {
   Future<List<CommentEntity>> getAll({required int productId});
 }
 
-class CommentDataSource
+class CommentRemoteDataSource
     with HttpResponseValdiator
     implements ICommentDataSource {
   final Dio httpclient;
 
-  CommentDataSource({required this.httpclient});
+  CommentRemoteDataSource({required this.httpclient});
   @override
   Future<List<CommentEntity>> getAll({required int productId}) async {
     final response = await httpclient.get('comment/list?product_id=$productId');
